@@ -1,0 +1,106 @@
+<!DOCTYPE HTML>
+<!--
+	Linear by TEMPLATED
+    templated.co @templatedco
+    Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<html>
+	<head>
+		<title>Gerador de Numeros - Loteria</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,700,500,900' rel='stylesheet' type='text/css'>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+		<script src="js/skel.min.js"></script>
+		<script src="js/skel-panels.min.js"></script>
+		<script src="js/init.js"></script>
+		<noscript>
+			<link rel="stylesheet" href="css/skel-noscript.css" />
+			<link rel="stylesheet" href="css/style.css" />
+			<link rel="stylesheet" href="css/style-desktop.css" />
+		</noscript>
+	</head>
+	<body class="homepage">
+
+	<div id="featured">
+			<div class="container">
+
+				<header><h2>GERADOR DE NÚMEROS</h2></header>
+				
+					
+						<text>Mega-Sena[Num Máx: 60 , Num sortear: 6] <br/>
+						Lotofácil[Num Máx: 25 , Num sortear: 15]</text>
+						<br/>
+						<div style="margin-top:20px;">
+						 <h2 style="font-size: 1.5em"> Número máximo:</h2><input type="text" id="maxnumber" name="maxnumber" value=25 /> <br/> <br/>
+						 <h2 style="font-size: 1.5em"> Números para sortear:</h2> <input type="text" id="sortnumber" name="sortnumber" value=15 /> 
+						</div>
+
+						<button id="sortearNovo" class="button button-style1">Gerar números</button> <br/>
+						<br/>
+						Resultado:
+						<div id="resultados"></div>
+
+			</div>
+	</div>
+
+	<!-- Copyright -->
+		<div id="copyright">
+			<div class="container">
+				Design: <a href="http://acauanrr.k6.com.br/">Acauan Ribeiro</a>
+			</div>
+		</div>
+
+
+</body>
+
+<script language="JavaScript">
+var sorteados = [];
+var numFinals = [];
+var valorMaximo = 0;
+var numSorteados = 0;
+
+function criarUnico() {
+  //  if (sorteados.length == valorMaximo) {
+  //      if (confirm('Já não há mais! Quer recomeçar?')) sorteados = [];
+  //      else return;
+  //  }
+    var sugestao = Math.ceil(Math.random() * valorMaximo);
+    while (sorteados.indexOf(sugestao) >= 0) {
+        sugestao = Math.ceil(Math.random() * valorMaximo);
+    }
+    sorteados.push(sugestao);
+    return sugestao;
+}
+
+sorteados = [];
+var sortearNovo = document.getElementById('sortearNovo');
+var novoNumero = document.getElementById('novoNumero');
+sortearNovo.addEventListener('click', function () {
+
+	numFinals = [];
+
+	valorMaximo = document.getElementById('maxnumber').value;
+	numSorteados = document.getElementById('sortnumber').value;
+
+	if(sorteados.length > 0) {
+		sorteados = [];
+	}
+
+    document.getElementById('resultados').innerHTML = '';
+    var bl = ' ';
+	for (var i = 0; i < numSorteados; i++) {
+	
+		numFinals.push(" "+criarUnico());
+ 
+	}
+	numFinals.sort(function(a,b) {
+	    return a - b;
+	});
+
+document.getElementById('resultados').innerHTML = numFinals ;
+});
+</script>
+
+</html>
